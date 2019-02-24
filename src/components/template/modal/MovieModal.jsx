@@ -1,31 +1,40 @@
 import './MovieModal.css'
 import React, { Component } from 'react'
-import MovieMainData from './MovieMainData';
-import MovieCharacters from './MovieCharacters';
+import MovieMainData from './MovieMainData'
+import MovieCharacters from './MovieCharacters'
 import axios from 'axios'
 
 const initialState = {
     showMainData: true,
     showCharacters: false,
+    isLoading: false,
     characters: []
 }
 
 export default class MovieModal extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = { ...initialState }
 
-        this.showCharacters = this.showCharacters.bind(this);
-        this.resetState = this.resetState.bind(this);
+        this.showCharacters = this.showCharacters.bind(this)
+        this.setTabMain = this.setTabMain.bind(this)
+        this.resetState = this.resetState.bind(this)
     }
 
     showCharacters(charactersUrls) {
+        if (this.state.characters.length) {
+            this.setTabCharacters()
+            return
+        }
+
+        this.setState({ isLoading: true })
+
         let promises = charactersUrls.map(character => {
             return new Promise((resolve, reject) => {
                 axios(character)
                     .then(resolve)
-                    .catch(reject);
+                    .catch(reject)
             })
         })
 
@@ -33,17 +42,30 @@ export default class MovieModal extends Component {
             let characters = resp.map((character) => {
                 return {
                     name: character.data.name,
-                    skin_color: character.data.skin_color
+                    skin_color: character.data.skin_color,
+                    eye_color: character.data.eye_color,
+                    mass: character.data.mass
                 }
             })
-
-            this.setState({
-                showCharacters: true,
-                showMainData: false,
-                characters
-            })
+            this.setState({ isLoading: false })
+            this.setState({ characters })
+            this.setTabCharacters()
         }).catch(() => {
             alert('Erros ao ler dados. Tente novamente.')
+        })
+    }
+
+    setTabCharacters() {
+        this.setState({
+            showCharacters: true,
+            showMainData: false
+        })
+    }
+
+    setTabMain() {
+        this.setState({
+            showCharacters: false,
+            showMainData: true
         })
     }
 
@@ -58,27 +80,31 @@ export default class MovieModal extends Component {
     }
 
     render() {
-        let styles = this.props.modalVisible
-            ? { display: "block" }
-            : { display: "none" };
-        //Só exibir voltar se estiver na segunda aba (Ver para adpatar pra mais abas)
+        let styleModal = this.props.modalVisible ? { display: "block" } : { display: "none" }
+        let characterSelected = this.state.showCharacters ? "selected" : ""
+        let mainSelected = this.state.showCharacters ? "" : "selected"
+
         return (
-            <div style={styles} className="modal">
+            <div style={styleModal} className="modal">
                 <div className="modal-content">
                     <div className="modal-header">
                         <button type="button" className="close" onClick={this.props.closeModal}>
                             <span>&times;</span>
                         </button>
-                        <p className="modal-title">Detalhes do filme</p>
+                        <p className="ml-10">Detalhes do filme</p>
                     </div>
 
                     <div className="modal-body">
-                        <button className="btn-voltar"onClick={this.resetState}>Voltar</button> 
-
                         <MovieMainData movie={this.props.movie} visible={this.state.showMainData} />
                         <MovieCharacters characters={this.state.characters} visible={this.state.showCharacters} />
-                        
-                        <a className="link" href="#" onClick={() => this.showCharacters(this.props.movie.characters)}>Atores</a>
+                    </div>
+
+                    <div className="modal-footer">
+                        <div className="modal-footer-content">
+                            <a className={`link ${mainSelected}`} href="#" onClick={this.setTabMain}>Principal</a>
+                            <a className={`link ml-10 ${characterSelected}`} href="#" onClick={() => this.showCharacters(this.props.movie.characters)}>Atores</a>
+                            <i className={`fa fa-spinner fa-spin ${this.state.isLoading ? 'icon-visible' : 'icon-hidden'}`}></i>
+                        </div>
                     </div>
                 </div>
             </div>

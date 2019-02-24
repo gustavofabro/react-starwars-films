@@ -1,7 +1,3 @@
-body {
-    color: #212529;
-}
-
 label {
     font-weight: bold;
 }
@@ -40,13 +36,14 @@ label {
     background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Content */
 .modal-content {
+  position: relative;
   background-color: #fefefe;
   margin: auto;
   border: 1px solid #888;
   width: 70%;
-  height: 55%;
+  min-width: 400px;
+  height: 500px;
 }
 
 .modal-body {
@@ -54,9 +51,22 @@ label {
 }
 
 .modal-header {
-  padding: 2px 16px;
+  padding: 2px 2px;
   background-color: #ddd;
   color: black;
+}
+
+.modal-footer {
+    position: absolute;
+    bottom: 0;
+    background-color: #ddd;
+    width: 100%;
+    height: 50px
+}
+
+.modal-footer-content {
+    margin-top: 17px;
+    margin-left: 10px;
 }
 
 .close {
@@ -66,6 +76,10 @@ label {
     -webkit-appearance: none;
 }
 
+.close:hover {
+    cursor: pointer;
+}
+
 .close span {
     font-size: 1.5rem;
     font-weight: 700;
@@ -73,16 +87,20 @@ label {
     color: #000;
 }
 
-.link:visited {
-    color: #005999
+.link {
+    padding: 5px;
+    text-decoration: none;
+    border-radius: 2px;
 }
 
-.btn-voltar {
-    float: right;
+.selected {
+    background-color: #75507b;
+    color: white
 }
+
+/* Grid characters */
 
 table.scroll {
-    width: 100%; /* 140px * 5 column + 16px scrollbar width */
     border-spacing: 0;
 }
 
@@ -95,18 +113,18 @@ table.scroll tbody {
     overflow-x: hidden;
 }
 
-table.scroll tbody td,
-table.scroll thead th {
-    width: 140px;
+
+table.scroll tbody .table-desc,
+table.scroll thead .table-desc {
+    width: 400px;
 }
 
-table.scroll thead th:last-child {
-    width: 156px; /* 140px + 16px scrollbar width */
+table.scroll tbody td,
+table.scroll thead th {
+    width: 240px;
 }
 
 thead tr th { 
     height: 30px;
     line-height: 30px;
-    /*text-align: left;*/
 }
-

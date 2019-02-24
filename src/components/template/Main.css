@@ -1,3 +1,7 @@
+body {
+    color: #212529;
+}
+
 .title {
     text-align: center;
     margin-top: 10px;
@@ -17,6 +21,18 @@ table, table th, table td {
     border-bottom: 1px solid #ddd;
 }
 
-table tr:hover {
+table tbody tr:hover {
     background-color: #ddd;
+}
+
+.ml-10 {
+    margin-left: 10px
+}
+
+.icon-visible {
+    display: inline-block!important;
+}
+
+.icon-hidden {
+    display: none!important;
 }

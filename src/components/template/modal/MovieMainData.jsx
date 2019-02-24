@@ -31,7 +31,7 @@ export default props => {
                 </div>
             </div>
 
-            <div className="detail">
+            <div>
                 <label>Resumo</label>
                 <div className="descricao">{props.movie.opening_crawl}</div>
             </div>

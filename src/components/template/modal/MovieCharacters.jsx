@@ -9,8 +9,10 @@ export default props => {
         return props.characters.map(character => {
             return (
                 <tr key={character.name}>
-                    <td>{character.name}</td>
+                    <td className="table-desc">{character.name}</td>
                     <td>{character.skin_color}</td>
+                    <td>{character.eye_color}</td>
+                    <td>{character.mass}</td>
                 </tr>
             )
         })
@@ -21,8 +23,10 @@ export default props => {
             <table className="table table-modal scroll">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th className="table-desc">Nome</th>
                         <th>Cor da roupa</th>
+                        <th>Cor dos olhos</th>
+                        <th>Peso (Kg)</th>
                     </tr>
                 </thead>
                 <tbody>{renderRows()}</tbody>
