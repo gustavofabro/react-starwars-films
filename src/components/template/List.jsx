@@ -1,6 +1,7 @@
 import './List.css'
 import React, { Component } from 'react'
 import axios from 'axios'
+import shortid from 'shortid'
 
 const baseUrlMovie = 'https://swapi.co/api/films/'
 
@@ -13,6 +14,8 @@ export default class List extends Component {
     componentWillMount() {
         axios(baseUrlMovie).then(resp => {
             this.setState({ list: resp.data.results })
+        }).catch(() => {
+            alert('Erros ao ler dados. Tente novamente')
         })
     } 
 
@@ -36,7 +39,7 @@ export default class List extends Component {
     renderRows() {
         return this.state.list.map (movie => {
             return (
-                <tr onDoubleClick={() => this.load(movie)} key={movie.episode_id}>
+                <tr onDoubleClick={() => this.load(movie)} key={shortid.generate()}>
                     <td>{movie.title}</td>
                 </tr>
             )

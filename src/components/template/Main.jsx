@@ -27,7 +27,7 @@ export default class Main extends Component {
     render() {
         return (
             <article>
-                <h1 className="title">Lista de filmes</h1>
+                <h1 className="title">Lista de filmes Star Wars</h1>
                 <List openModal={this.openModal} />
                 <MovieModal movie={this.state.movie} closeModal={this.closeModal} modalVisible={this.state.modalVisible} />
             </article>

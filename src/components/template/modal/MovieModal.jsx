@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import MovieMainData from './MovieMainData'
 import MovieCharacters from './MovieCharacters'
 import axios from 'axios'
+import shortid from 'shortid'
 
 const initialState = {
     showMainData: true,
@@ -23,13 +24,16 @@ export default class MovieModal extends Component {
     }
 
     showCharacters(charactersUrls) {
+        this.setTabCharacters()
+
         if (this.state.characters.length) {
-            this.setTabCharacters()
             return
         }
 
-        this.setTabCharacters()
+        this.loadCharacters(charactersUrls)
+    }
 
+    loadCharacters(charactersUrls) {
         this.setState({ isLoading: true })
 
         let promises = charactersUrls.map(character => {
@@ -43,14 +47,14 @@ export default class MovieModal extends Component {
         Promise.all(promises).then((resp) => {
             let characters = resp.map((character) => {
                 return {
+                    id: shortid.generate(),
                     name: character.data.name,
                     skin_color: character.data.skin_color,
                     eye_color: character.data.eye_color,
                     mass: character.data.mass
                 }
             })
-            this.setState({ isLoading: false })
-            this.setState({ characters })
+            this.setState({ characters, isLoading: false })
         }).catch(() => {
             alert('Erros ao ler dados. Tente novamente.')
         })
@@ -103,7 +107,7 @@ export default class MovieModal extends Component {
                     <div className="modal-footer">
                         <div className="modal-footer-content">
                             <button className={`btn-nav ${mainSelected}`} href="#" onClick={this.setTabMain}>Principal</button>
-                            <button className={`btn-nav ml-10 ${characterSelected}`} href="#" onClick={() => this.showCharacters(this.props.movie.characters)}>Atores</button>
+                            <button className={`btn-nav ml-10 ${characterSelected}`} href="#" onClick={() => this.showCharacters(this.props.movie.characters)}>Personagens</button>
                             <i className={`fa fa-spinner fa-spin load-icon ${this.state.isLoading ? 'icon-visible' : 'icon-hidden'}`}></i>
                         </div>
                     </div>

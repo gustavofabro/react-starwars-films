@@ -32,7 +32,7 @@ export default props => {
             </div>
 
             <div>
-                <label>Resumo</label>
+                <label>Abertura</label>
                 <div className="descricao">{props.movie.opening_crawl}</div>
             </div>
         </div>

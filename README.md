@@ -1,16 +1,16 @@
 # Star Wars movie list
 
-# Dependencies 
-
 ```sh
+# Dependencies
 npm install
 ```
 
-# Run
 ```sh
+# Run
 npm start
 ```
 
 ```sh
+#build
 npm run-script build
 ```

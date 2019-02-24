@@ -8,7 +8,7 @@ export default props => {
     function renderRows() {
         return props.characters.map(character => {
             return (
-                <tr key={character.name}>
+                <tr key={character.id}>
                     <td className="table-desc">{character.name}</td>
                     <td>{character.skin_color}</td>
                     <td>{character.eye_color}</td>
@@ -37,7 +37,7 @@ export default props => {
     return (
         <div style={styles}>
             <div className="detail">
-                <label>Atores do filme</label>
+                <label>Personagens do filme</label>
                 {renderTable()}
             </div>
         </div>
