@@ -10,3 +10,7 @@ npm install
 ```sh
 npm start
 ```
+
+```sh
+npm run-script build
+```

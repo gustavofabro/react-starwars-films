@@ -28,6 +28,8 @@ export default class MovieModal extends Component {
             return
         }
 
+        this.setTabCharacters()
+
         this.setState({ isLoading: true })
 
         let promises = charactersUrls.map(character => {
@@ -49,7 +51,6 @@ export default class MovieModal extends Component {
             })
             this.setState({ isLoading: false })
             this.setState({ characters })
-            this.setTabCharacters()
         }).catch(() => {
             alert('Erros ao ler dados. Tente novamente.')
         })
@@ -101,9 +102,9 @@ export default class MovieModal extends Component {
 
                     <div className="modal-footer">
                         <div className="modal-footer-content">
-                            <a className={`link ${mainSelected}`} href="#" onClick={this.setTabMain}>Principal</a>
-                            <a className={`link ml-10 ${characterSelected}`} href="#" onClick={() => this.showCharacters(this.props.movie.characters)}>Atores</a>
-                            <i className={`fa fa-spinner fa-spin ${this.state.isLoading ? 'icon-visible' : 'icon-hidden'}`}></i>
+                            <button className={`btn-nav ${mainSelected}`} href="#" onClick={this.setTabMain}>Principal</button>
+                            <button className={`btn-nav ml-10 ${characterSelected}`} href="#" onClick={() => this.showCharacters(this.props.movie.characters)}>Atores</button>
+                            <i className={`fa fa-spinner fa-spin load-icon ${this.state.isLoading ? 'icon-visible' : 'icon-hidden'}`}></i>
                         </div>
                     </div>
                 </div>

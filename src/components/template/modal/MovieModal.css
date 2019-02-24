@@ -65,7 +65,7 @@ label {
 }
 
 .modal-footer-content {
-    margin-top: 17px;
+    margin-top: 14px;
     margin-left: 10px;
 }
 
@@ -87,10 +87,20 @@ label {
     color: #000;
 }
 
-.link {
+.btn-nav {
     padding: 5px;
     text-decoration: none;
-    border-radius: 2px;
+    border: none;
+    outline: none;
+    border-radius: 2px;cursor: pointer;
+}
+
+.btn-nav:focus {
+    border: none;
+}
+
+.load-icon {
+    margin-left: 5px;
 }
 
 .selected {
